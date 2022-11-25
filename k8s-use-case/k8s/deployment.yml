@@ -20,6 +20,12 @@ spec:
           envFrom:
             - configMapRef:
                 name: app
+          livenessProbe:
+            httpGet:
+              port: 8080
+              path: /healthz
+            initialDelaySeconds: 5
+            periodSeconds: 5
       restartPolicy: Always
   selector:
     matchLabels:

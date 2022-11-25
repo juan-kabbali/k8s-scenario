@@ -24,3 +24,21 @@ is used to put all components together and make easier the apply process, is can
 avoid duplication. 
 
 ```kubectl apply -k k8s-use-case/k8s```
+
+**the node js app is publicly exposed through the static ip [34.160.238.114](http://34.160.238.114/)**
+
+### CI/CD
+
+I would like to implement a CI / CD basics actions using [kubectl for gke](https://github.com/marketplace/actions/kubectl-google-cloud-gke-cluster)
+but for the connection between the GitHub agent and GCP we need to create a service account, and I haven't permissions.
+
+Anyway, I'll list the possible CI/CD actions that could be potentially implemented:
+
+* CI
+  * run a ``yamllint``
+  * run a ``kustomization build``
+  * run a ``detect-secrets`` to the previous build output
+  
+* CD
+  * run a ``kubctl diff`` pointing to the kustomization file to get the entire stack difference instead of the diff of a single resource
+  * run a ``kubectl apply -k k8s-use-case/k8s`` with manual approbation
