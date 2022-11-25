@@ -1,0 +1,26 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: app
+  labels:
+    app: app
+    tech: node
+spec:
+  replicas: 1
+  template:
+    metadata:
+      name: app
+      labels:
+        app: app
+    spec:
+      containers:
+        - name: app
+          image: jaguirrema/app:latest
+          imagePullPolicy: Always
+          envFrom:
+            - configMapRef:
+                name: app
+      restartPolicy: Always
+  selector:
+    matchLabels:
+      app: app
