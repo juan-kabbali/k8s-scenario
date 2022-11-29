@@ -2,13 +2,18 @@ apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   name: app
-#  annotations:
+  annotations:
+    kubernetes.io/ingress.class: nginx
     # here we can define a whitelist
     # nginx.ingress.kubernetes.io/whitelist-source-range: 34.10.0.0/24
 spec:
+  tls:
+    - secretName: app-tls-cert
+      hosts:
+        - juan-pablo-aguirre.test-devops.elmy.team
   rules:
-    - http:
-      # host: test.jaguirre.com
+    - host: juan-pablo-aguirre.test-devops.elmy.team
+      http:
         paths:
           - path: /
             pathType: Prefix

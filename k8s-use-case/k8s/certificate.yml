@@ -1,0 +1,11 @@
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: app-cert
+spec:
+  dnsNames:
+    - juan-pablo-aguirre.test-devops.elmy.team
+  secretName: app-tls-cert
+  issuerRef:
+    name: letsencrypt-prod
+    kind: ClusterIssuer
